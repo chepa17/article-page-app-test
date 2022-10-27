@@ -4,7 +4,7 @@ export type ArticleType = {
     averageRating: string;
     expectedDeliveryDate: string;
     images: ArticleImage[];
-    oldPrice: Price;
+    oldPrice: Price | null;
     price: Price;
     productId: string;
     shippingTimeMax: string;
