@@ -25,14 +25,14 @@ const ArticlesFilters = ({onFilterHandler, onSortingHandler}: Props) => {
     const [sorting, setSorting] = useState<string>("relevance");
     const onFilterChange = useCallback(() => {
         setFilter(!filter);
+        onFilterHandler(!filter);
     }, [filter])
 
     const onSortingChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSorting(event.target.value)
+        setSorting(event.target.value);
+        onSortingHandler(event.target.value);
     }, [])
 
-    useEffect(() => onFilterHandler(filter), [filter, onFilterHandler]);
-    useEffect(() => onSortingHandler(sorting), [sorting, onSortingHandler]);
     return <ArticlesFiltersStyled>
         <ArticlesFiltersCheckboxLabel>
             <ArticlesFiltersCheckbox type='checkbox' checked={filter} onChange={onFilterChange} />
