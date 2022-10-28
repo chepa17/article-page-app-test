@@ -24,7 +24,7 @@ const useArticles = (props: Props) => {
         setSortedArticles(response.articles)
     }
 
-    return {state: {articles: cheaper ? sortedArticles.filter(article => article.price.amount < 50) :sortedArticles}}
+    return {articles: cheaper ? sortedArticles.filter(article => article.price.amount < 50) :sortedArticles}
 }
 
 export default useArticles;

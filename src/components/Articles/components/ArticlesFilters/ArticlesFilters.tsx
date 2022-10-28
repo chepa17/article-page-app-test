@@ -5,12 +5,11 @@ import {
     ArticlesFiltersCheckboxTitle,
     ArticlesFiltersStyled
 } from "./Articles.styled";
+import {useCallback, useEffect, useState} from "react";
 
 type Props = {
-    cheaper: boolean;
-    setCheaper: (arg: boolean) => void;
-    sorting: string;
-    setSorting: (arg: string) => void;
+    onFilterHandler: (arg: boolean) => void;
+    onSortingHandler: (arg: string) => void;
 }
 
 const options = [
@@ -21,16 +20,27 @@ const options = [
     { value: 'ratingLow', label: 'Lägsta betyg' },
 ]
 
-const ArticlesFilters = (props: Props) => {
-    const {cheaper, setCheaper, sorting, setSorting} = props;
+const ArticlesFilters = ({onFilterHandler, onSortingHandler}: Props) => {
+    const [filter, setFilter] = useState(false);
+    const [sorting, setSorting] = useState<string>("relevance");
+    const onFilterChange = useCallback(() => {
+        setFilter(!filter);
+    }, [filter])
+
+    const onSortingChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSorting(event.target.value)
+    }, [])
+
+    useEffect(() => onFilterHandler(filter), [filter, onFilterHandler]);
+    useEffect(() => onSortingHandler(sorting), [sorting, onSortingHandler]);
     return <ArticlesFiltersStyled>
         <ArticlesFiltersCheckboxLabel>
-            <ArticlesFiltersCheckbox type='checkbox' checked={cheaper} onChange={() => {setCheaper(!cheaper)}} />
+            <ArticlesFiltersCheckbox type='checkbox' checked={filter} onChange={onFilterChange} />
             <ArticlesFiltersCheckboxTitle>Cheaper then 50kr</ArticlesFiltersCheckboxTitle>
         </ArticlesFiltersCheckboxLabel>
         <ArticleFiltersSorting>
             <ArticleFiltersSortingTitle>Sortera pä</ArticleFiltersSortingTitle>
-            <select onChange={(event) => setSorting(event.target.value)} value={sorting}>
+            <select onChange={onSortingChange} value={sorting}>
                 {options.map(option => <option key={option.value} value={option.value}>
                     {option.label}
                 </option>)}

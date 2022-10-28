@@ -1,11 +1,7 @@
 import Articles from "./components/Articles";
 
 function App() {
-  return (
-    <div>
-        <Articles />
-    </div>
-  );
+  return <Articles />
 }
 
 export default App;

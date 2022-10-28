@@ -13,9 +13,8 @@ type Props = {
     data: ArticleType;
 }
 
-const Article = (props: Props) => {
+const Article = ({data}: Props) => {
     const [imageExist, setImageExist] = useState(true);
-    const {data} = props;
     function onError() {
         setImageExist(false);
     }

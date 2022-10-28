@@ -27,7 +27,6 @@ export const ArticleStyled = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 268px;
   background-color: rgb(255, 255, 255);
   box-sizing: border-box;
   position: relative;

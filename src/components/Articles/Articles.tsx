@@ -6,13 +6,17 @@ import {useState} from "react";
 
 const Articles = () => {
     const [cheaper, setCheaper] = useState(false);
-    const [sorting, setSorting] = useState<string>("relevance")
-    const {state} = useArticles({cheaper, sorting});
-    const {articles} = state;
-    return <ArticlesPageStyled>
-        <ArticlesFilters cheaper={cheaper} setCheaper={setCheaper} sorting={sorting} setSorting={setSorting}/>
-        <ArticlesList>{articles.map(article => <Article data={article} key={article.articleId}/>)}</ArticlesList>
-    </ArticlesPageStyled>
+    const [sorting, setSorting] = useState<string>("relevance");
+    const onFilterHandler = (cheaper: boolean) => setCheaper(cheaper);
+    const onSortingHandler = (sorting: string) => setSorting(sorting);
+    const {articles} = useArticles({cheaper, sorting});
+
+    return (
+        <ArticlesPageStyled>
+            <ArticlesFilters onFilterHandler={onFilterHandler} onSortingHandler={onSortingHandler}/>
+            <ArticlesList>{articles.map(article => <Article data={article} key={article.articleId}/>)}</ArticlesList>
+        </ArticlesPageStyled>
+    )
 }
 
 export default Articles;

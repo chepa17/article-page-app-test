@@ -4,6 +4,7 @@ export const ArticlesFiltersStyled = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 0 10px;
+  margin: 15px 0;
   @media (max-width: 767px) {
     flex-direction: column;
     align-items: center;
